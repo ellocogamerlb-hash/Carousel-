@@ -1175,5 +1175,69 @@
       // document.getElementById('input-barcode').focus(); 
     };
   </script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCYagTaDf69NVYoMJmQu6CK-J0wikSePpI",
+    authDomain: "posc-2f22d.firebaseapp.com",
+    projectId: "posc-2f22d",
+    storageBucket: "posc-2f22d.firebasestorage.app",
+    messagingSenderId: "51953121889",
+    appId: "1:51953121889:web:eab6df68501210c90f4820",
+    measurementId: "G-SZRWKWLPE6"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+<script type="module">
+  // 1. Importamos las herramientas necesarias de Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+  // 2. Tus credenciales reales de POS CAROUSEL
+  const firebaseConfig = {
+    apiKey: "AIzaSyCYagTaDf69NVYoMJmQu6CK-J0wikSePpI",
+    authDomain: "posc-2f22d.firebaseapp.com",
+    projectId: "posc-2f22d",
+    storageBucket: "posc-2f22d.firebasestorage.app",
+    messagingSenderId: "51953121889",
+    appId: "1:51953121889:web:eab6df68501210c90f4820",
+    measurementId: "G-SZRWKWLPE6"
+  };
+
+  // 3. Inicializamos Firebase y la Base de Datos
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Hacer la base de datos accesible globalmente en el teléfono
+  window.db = db;
+
+  // 4. PRUEBA AUTOMÁTICA: Guardar un artículo de prueba al cargar la página
+  async function probarConexion() {
+    try {
+      const docRef = await addDoc(collection(db, "productos"), {
+        nombre: "Lip Oil de Prueba",
+        precio: 69,
+        fecha: new Date().toISOString()
+      });
+      console.log("¡Conexión exitosa! Producto guardado con ID:", docRef.id);
+      alert("¡Firebase conectado con éxito! Revisa tu consola.");
+    } catch (error) {
+      console.error("Error al conectar con Firebase:", error);
+    }
+  }
+
+  // Ejecutamos la prueba en cuanto cargue la página
+  probarConexion();
+</script>
 </body>
 </html>
